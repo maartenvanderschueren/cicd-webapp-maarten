@@ -1,0 +1,56 @@
+version: "3"
+services:
+  webapp:
+    image: webapp
+    build: .
+    ports:
+      - "3000:3000"
+    container_name: webapp-container
+    restart: unless-stopped
+    volumes:
+      - ./database:/app/database
+    environment:
+      MYSQL_URL: mysql://root:${MYSQL_ROOT_PASSWORD}@database/animals
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+  database:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: animals
+    ports:
+      - "3307:3306"
+    volumes:
+      - sql_data:/var/lib/mysql
+    networks:
+      - app-network
+  
+  test:
+    build: .
+    image: webapp
+    container_name: test-container
+    environment:
+      API_URL: http://webapp:3000
+    command: yarn test
+    depends_on:
+      - webapp
+      - database
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+    
+
+  
+
+networks:
+  app-network:
+
+volumes:
+  sql_data:
+
