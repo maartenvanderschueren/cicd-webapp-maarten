@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: 20
       - run: yarn install
-      - run: yarn lint .eslintrc.json
+      - run: yarn lint
