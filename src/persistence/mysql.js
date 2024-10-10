@@ -17,7 +17,7 @@ export async function initialize() {
 
   if (animalCount['count(*)'] === 0) {
     await knexInstance('animals').insert(generateFakeData());
-    console.log('Fake data generated');
+    console.log('Fake data generated now');
   }
 
   console.log('MySQL database initialized');
