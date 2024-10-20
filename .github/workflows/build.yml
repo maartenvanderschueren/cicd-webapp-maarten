@@ -16,8 +16,13 @@ jobs:
       - run: yarn lint
         env:
           ESLINT_USE_FLAT_CONFIG: false
+      - name: Start the server
+        run: yarn start & 
+        env:
+          NODE_ENV: test
+
       - name: Run testen
-        run: yarn test --verbose
+        run: yarn test
   docker:
     runs-on: ubuntu-latest
     steps:
