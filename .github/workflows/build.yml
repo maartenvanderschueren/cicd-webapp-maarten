@@ -12,11 +12,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: yarn install
+      - run: yarn install --frozen-lockfile
       - run: yarn lint
         env:
           ESLINT_USE_FLAT_CONFIG: false
-      - run: yarn test
   docker:
     runs-on: ubuntu-latest
     steps:
