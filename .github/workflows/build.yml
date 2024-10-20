@@ -15,7 +15,7 @@ jobs:
       - run: yarn install
       - run: yarn lint
         env:
-          ESLINT_USE_FLAT_CONFIG: true
+          ESLINT_USE_FLAT_CONFIG: false
   docker:
     runs-on: ubuntu-latest
     steps:
